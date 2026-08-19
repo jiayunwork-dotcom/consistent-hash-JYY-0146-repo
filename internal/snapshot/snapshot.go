@@ -150,7 +150,7 @@ func decode(data []byte) (*RingState, error) {
 			return nil, ErrTruncated
 		}
 		nodes = append(nodes, string(data[pos:pos+nameLen]))
-		pos += 1
+		pos += nameLen
 	}
 
 	return &RingState{

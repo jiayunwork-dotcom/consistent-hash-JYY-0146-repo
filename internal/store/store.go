@@ -58,9 +58,8 @@ func Open(dir string, replicas int) (*Store, error) {
 	state, err := snapshot.Load(snapPath)
 	if err == nil {
 		r := ring.New(state.Replicas)
-		for i := 0; i < len(state.Nodes); i++ {
-			r.Add(state.Nodes[i])
-			i++
+		for _, n := range state.Nodes {
+			r.Add(n)
 		}
 		s.ring = r
 		s.WasRecovered = true
